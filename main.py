@@ -45,6 +45,20 @@ def softmax(x):
 # nb_neurons of the input layer must match the number of features
 # g refers to the activation function. Default is sigmoid
 
+def feed_forward_test(nb_layers, X, W, b, g=sigmoid):
+    
+    # Initialize the input layer
+    A = [0 for i in range(nb_layers)]
+    A[0] = X.T
+    Z = [0 for i in range(nb_layers)]
+    
+    # Neuron values updated with the forward pass
+    for i in range(1, len(W)):
+        Z[i] = W[i-1] @ A[i-1] + b[i-1]
+        A[i] = g(Z[i])
+    return A, Z, A[-1]
+
+
 def feed_forward(nb_layers, nb_neurons, X, g=sigmoid):
     
     
@@ -53,6 +67,7 @@ def feed_forward(nb_layers, nb_neurons, X, g=sigmoid):
     A[0] = X.T
     Z = [0 for i in range(nb_layers)]
     W, b = init_layers(nb_layers, nb_neurons)
+
     print(W)
     print("----------------")
     print(b)
@@ -60,9 +75,10 @@ def feed_forward(nb_layers, nb_neurons, X, g=sigmoid):
     
     # Neuron values updated with the forward pass
     for i in range(1, len(W)):
-        Z[i] = W[i] @ A[i-1] + b[i]
+        Z[i] = W[i-1] @ A[i-1] + b[i-1]
         A[i] = g(Z[i])
-    return A[-1]
+    return A, Z, A[-1]
 
 
-print(feed_forward(3, [2, 2, 1], np.array([[1, 2], [3, 4]]), g=sigmoid))
+#print(feed_forward(3, [2, 2, 1], np.array([[1, 2], [3, 4]]), g=sigmoid))
+init_layers(3, [3, 2, 2])

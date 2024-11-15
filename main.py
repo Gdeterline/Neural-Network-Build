@@ -20,7 +20,7 @@ def init_layers(nb_layers, nb_neurons):
         raise Exception("nb_neurons parameter is supposed to be a list")
 
     W = []
-    b = [0]
+    b = [np.zeros((nb_neurons[0], 1))]
     
     for i in range(0, nb_layers-1):
         W.append(np.random.randn(nb_neurons[i+1], nb_neurons[i]))
@@ -62,14 +62,12 @@ def feed_forward_test(nb_layers, X, W, b, g=sigmoid):
     
     # Neuron values updated with the forward pass
     for i in range(1, len(W)+1):
-        Z[i] = W[i-1] @ A[i-1] + b[i-1]
+        Z[i] = W[i-1] @ A[i-1] + b[i]
         A[i] = g(Z[i])
     return A, Z, A[-1]
 
 
 def feed_forward(nb_layers, nb_neurons, X, g=sigmoid):
-    
-    
     
     # Initialize the input layer
     A = [0 for i in range(nb_layers)]
@@ -78,11 +76,11 @@ def feed_forward(nb_layers, nb_neurons, X, g=sigmoid):
     Z[0] = A[0]
     W, b = init_layers(nb_layers, nb_neurons)
 
-    print(W)
-    print("----------------")
-    print(b)
-    print(len(b))
-    print("----------------")
+    #print(W)
+    #print("----------------")
+    #print(b)
+    #print(len(b))
+    #print("----------------")
     
     # Neuron values updated with the forward pass
     for i in range(1, len(W)):
@@ -91,7 +89,13 @@ def feed_forward(nb_layers, nb_neurons, X, g=sigmoid):
     return A, Z, A[-1]
 
 
-#print(feed_forward(3, [2, 2, 1], np.array([[1, 2], [3, 4]]), g=sigmoid))
+W, b = init_layers(3, [3, 2, 2])
+
+print(b)
+
+
+
+""" #print(feed_forward(3, [2, 2, 1], np.array([[1, 2], [3, 4]]), g=sigmoid))
 
 W = [np.array([[1.], [2.]]), np.array([[1., 2.]])]
 b = [np.array([[1.], [2.]]), np.array([[3.]])]
@@ -102,4 +106,4 @@ X = np.array([[1.]])
     
 A, Z, output = feed_forward_test(L, X, W, b)
 
-print(Z)
+print(Z) """

@@ -138,10 +138,13 @@ $$
 \sigma(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}}
 $$
 
-
+In order to build a neural network, we have to choose an activation function. First we will build it using the sigmoid function. It is set as default function, but the idea is for the code to be modular, so in the end it should be possible to choose the activation function.
 
 
 ### Feed Forward <a name="feed-forward"></a>
+
+
+
 
 ### Loss Function <a name="loss-function"></a>
 

@@ -47,7 +47,7 @@ def softmax(x):
     return exp_x / np.sum(exp_x, axis=0)
 
 
-###### Feed forward
+###### Feed forward function
 # X refers to the input values. X must be of the following shape: (nb_features, nb_samples). X must be a numpy array
 # nb_neurons of the input layer must match the number of features
 # g refers to the activation function. Default is sigmoid
@@ -65,4 +65,7 @@ def feed_forward(nb_layers, X, W, b, g=sigmoid):
         Z[i] = W[i-1] @ A[i-1] + b[i]
         A[i] = g(Z[i])
     return A, Z, A[-1]
+
+
+##### Loss Functions 
 

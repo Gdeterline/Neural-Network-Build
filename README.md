@@ -223,6 +223,9 @@ The feed-forward algorithm is the first step of the training process of a neural
 
 ### Loss Function <a name="loss-function"></a>
 
+Non convex functions - local minimums can be a problem
+binary cross entropy loss function
+
 ### Backpropagation <a name="backpropagation"></a>
 
 ## Implementation <a name="implementation"></a>

@@ -69,3 +69,13 @@ def feed_forward(nb_layers, X, W, b, g=sigmoid):
 
 ##### Loss Functions 
 
+def binary_cross_entropy(y, y_hat):
+    return -np.sum(y*np.log(y_hat) + (1-y)*np.log(1-y_hat))
+
+def cross_entropy_loss(y, y_hat):
+    return -np.sum(y*np.log(y_hat))
+
+def mean_squared_error(y, y_hat, nb_samples):
+    return 1/nb_samples*np.sum((y - y_hat)**2)
+
+##### 

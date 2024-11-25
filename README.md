@@ -223,10 +223,41 @@ The feed-forward algorithm is the first step of the training process of a neural
 
 ### Loss Function <a name="loss-function"></a>
 
-Non convex functions - local minimums can be a problem
-binary cross entropy loss function
+In this section, we shall provide several loss functions, useful depeneding on the use cases.
+These functions are used to measure the difference between the predicted output of the neural network and the actual output. The goal is to minimize this difference by adjusting the weights and biaises of the neurons.
+
+It is important to choose non convex functions, as local minimums can be a problem. Indeed, the backpropagation algorithm is based on the gradient of the loss function, and if the loss function has local minimums, the algorithm may get stuck in them. This would imply that the neural network would not be able to learn the optimal weights and biaises. The predictions of the neural network would not be as accurate as they could be.
+
+The most common loss functions are:
+
+- **the Mean Squared Error Loss Function**
+
+    <ins>Use Case:</ins> Regression problems.
+
+$$
+L(\hat{Y}, Y) = \frac{1}{m} \sum_{i=1}^{m} (\hat{Y} - Y)^2
+$$
+
+- **the Binary Cross Entropy Loss Function**
+
+    <ins>Use Case:</ins> Binary classification problems.
+
+$$
+L(\hat{Y}, Y) = - \frac{1}{m} \sum_{i=1}^{m} Y \log(\hat{Y}) + (1 - Y) \log(1 - \hat{Y})
+$$
+
+Now that we have defined the loss functions, we can build the backpropagation algorithm, which is the second step of the training process of a neural network. It allows the neural network to adjust the weights and biaises of the neurons, to minimize the loss function.
 
 ### Backpropagation <a name="backpropagation"></a>
+
+The backpropagation algorithm is the process of calculating the gradient of the loss function with respect to the weights and biaises of the neurons, and updating the weights and biaises accordingly.
+
+The backpropagation algorithm goes like follows:
+- The gradient of the loss function with respect to the weights and biaises of the output layer is calculated.
+- The gradient of the loss function with respect to the weights and biaises of the hidden layers is calculated, by using the chain rule.
+- The weights and biaises of the neurons are updated, by subtracting the gradient of the loss function with respect to the weights and biaises of the neurons, multiplied by the learning rate.
+
+
 
 ## Implementation <a name="implementation"></a>
 

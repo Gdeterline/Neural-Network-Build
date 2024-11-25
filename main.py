@@ -46,6 +46,20 @@ def softmax(x):
     exp_x = np.exp(x)
     return exp_x / np.sum(exp_x, axis=0)
 
+###### Derivatives of the activation functions
+
+def sigmoid_derivative(x):
+    return x*(1-x)
+
+def tanh_derivative(x):
+    return 1 - np.tanh(x)**2
+
+def relu_derivative(x):
+    return np.where(x <= 0, 0, 1)
+
+def leaky_relu_derivative(x):
+    return np.where(x <= 0, 0.01, 1)
+
 
 ###### Feed forward function
 # X refers to the input values. X must be of the following shape: (nb_features, nb_samples). X must be a numpy array
@@ -69,13 +83,51 @@ def feed_forward(nb_layers, X, W, b, g=sigmoid):
 
 ##### Loss Functions 
 
-def binary_cross_entropy(y, y_hat):
-    return -np.sum(y*np.log(y_hat) + (1-y)*np.log(1-y_hat))
-
-def cross_entropy_loss(y, y_hat):
-    return -np.sum(y*np.log(y_hat))
+def binary_cross_entropy(y, y_hat, nb_samples):
+    return -(1/nb_samples)*np.sum(y*np.log(y_hat) + (1-y)*np.log(1-y_hat))
 
 def mean_squared_error(y, y_hat, nb_samples):
     return 1/nb_samples*np.sum((y - y_hat)**2)
 
-##### 
+##### Loss derivative
+
+def binary_cross_entropy_derivative(y, y_hat):
+    return -y/y_hat + (1-y)/(1-y_hat)
+
+def mean_squared_error_derivative(y, y_hat):
+    return y_hat - y
+
+
+##### Backpropagation
+
+def backpropagation(nb_layers, X, Y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_derivative, loss_derivative=mean_squared_error_derivative):
+        
+        # Initialize the gradients
+        grad_W = [np.zeros_like(w) for w in W]
+        grad_b = [np.zeros_like(bias) for bias in b]
+
+        # Number of samples
+        nb_samples = X.shape[1]
+        
+        # Compute the loss
+        dL_dA = loss_derivative(Y, A[-1])
+        dA_dZ = gder(Z[-1])
+        delta = dL_dA * dA_dZ
+        
+        # Backpropagate through layers
+        for i in range(nb_layers-1, 0, -1):
+            grad_W[i-1] = delta @ A[i-1].T / nb_samples
+            grad_b[i] = np.sum(delta, axis=1, keepdims=True) / nb_samples
+            
+            if i > 1:
+                delta = (W[i-1].T @ delta) * gder(Z[i-1])
+                
+        return grad_W, grad_b
+    
+##### Update the weights and biases
+
+def update_weights(W, b, grad_W, grad_b, learning_rate):
+    for i in range(len(W)):
+        W[i] -= learning_rate * grad_W[i]
+        b[i+1] -= learning_rate * grad_b[i]
+    return W, b

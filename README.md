@@ -226,7 +226,7 @@ The feed-forward algorithm is the first step of the training process of a neural
 In this section, we shall provide several loss functions, useful depeneding on the use cases.
 These functions are used to measure the difference between the predicted output of the neural network and the actual output. The goal is to minimize this difference by adjusting the weights and biaises of the neurons.
 
-It is important to choose non convex functions, as local minimums can be a problem. Indeed, the backpropagation algorithm is based on the gradient of the loss function, and if the loss function has local minimums, the algorithm may get stuck in them. This would imply that the neural network would not be able to learn the optimal weights and biaises. The predictions of the neural network would not be as accurate as they could be.
+It is important to choose convex functions, as local minimums can be a problem. Indeed, the backpropagation algorithm is based on the gradient of the loss function, and if the loss function has local minimums -which non convex functions may have-, the algorithm may get stuck in them. This would imply that the neural network would not be able to learn the optimal weights and biaises. The predictions of the neural network would not be as accurate as they could be.
 
 The most common loss functions are:
 

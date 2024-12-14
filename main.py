@@ -100,7 +100,7 @@ def mean_squared_error_derivative(y, y_hat):
 
 ##### Backpropagation
 
-def backpropagation(nb_layers, X, Y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_derivative, loss_derivative=mean_squared_error_derivative):
+def backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_derivative, loss_derivative=mean_squared_error_derivative):
         
         # Initialize the gradients
         grad_W = [np.zeros_like(w) for w in W]
@@ -110,7 +110,7 @@ def backpropagation(nb_layers, X, Y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_
         nb_samples = X.shape[1]
         
         # Compute the loss
-        dL_dA = loss_derivative(Y, y_hat)
+        dL_dA = loss_derivative(y, y_hat)
         dA_dZ = gder(Z[-1])
         delta = dL_dA * dA_dZ
         
@@ -131,3 +131,15 @@ def update_parameters(W, b, grad_W, grad_b, learning_rate):
         W[i] -= learning_rate * grad_W[i]
         b[i+1] -= learning_rate * grad_b[i]
     return W, b
+
+def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder=sigmoid_derivative, loss=mean_squared_error, loss_derivative=mean_squared_error_derivative):
+    
+    W, b = init_layers(nb_layers, nb_neurons)
+    
+    for i in range(epochs):
+        A, Z, y_hat = feed_forward(nb_layers, X, W, b, g)
+        grad_W, grad_b = backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g, gder, loss_derivative)
+        W, b = update_parameters(W, b, grad_W, grad_b, learning_rate)
+        
+        if i % 100 == 0:
+            print(f"Epoch {i} - Loss: {loss(y, y_hat, X.shape[1])}")

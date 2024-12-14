@@ -24,7 +24,7 @@ This project aims at creating a neural network from scratch, to apprehend not on
     
     2.6. [Backpropagation](#backpropagation)
 
-3. [Implementation](#implementation)
+3. [Testing Data](#testing-data)
 
 4. [First batch of results](#results)
 
@@ -257,9 +257,17 @@ The backpropagation algorithm goes like follows:
 - The gradient of the loss function with respect to the weights and biaises of the hidden layers is calculated, by using the chain rule.
 - The weights and biaises of the neurons are updated, by subtracting the gradient of the loss function with respect to the weights and biaises of the neurons, multiplied by the learning rate.
 
+#### Backpropagation implementation
 
+The backpropagation algorithm is implemented in the **backpropagation** function. The function is strictly modular, as it takes as input the number of layers of the neural network, the number of neurons in each layer of the neural network, the lists of weight matrices and bias vectors of the neural network, the lists of A and Z matrices of the neural network, the prediction of the neural network, the actual output, the learning rate, and the activation function. The function returns two lists : **grad_W** and **grad_b**. These lists contain the gradients of the loss function with respect to the weights and biaises of the neurons, respectively.
+Then, the **update_parameters** function is called to update the weights and biaises of the neurons.
 
-## Implementation <a name="implementation"></a>
+The backpropagation step of building a neural network is easily the most complex part of the process. It is the step where the neural network learns from the data, and adjusts its weights and biaises to minimize the loss function. It is the step where the neural network becomes more accurate, and is able to make better predictions.
+This means testing is essential here. There are several ways to test the backpropagation algorithm. 
+
+- The most common way is to use the *gradient checking method*. This method consists in comparing the gradients calculated by the backpropagation algorithm with the gradients calculated by the finite difference method. If the gradients are close enough, then the backpropagation algorithm has good chances of being correct. If not, then the backpropagation algorithm needs to be fixed. We will calculate the relative error between the gradients calculated by the backpropagation algorithm and the gradients calculated by the finite difference method. A good threshold for the relative error is $10^{-7}$.
+
+- Another way to test the backpropagation algorithm is to do an *overfitting test*. This test consists in training the neural network on a very small dataset, and checking if the loss function decreases with a big number of epochs. If the loss function decreases, then the backpropagation algorithm is working. If not, then the backpropagation algorithm needs to be fixed.
 
 ## First batch of results <a name="results"></a>
 

@@ -110,7 +110,7 @@ def backpropagation(nb_layers, X, Y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_
         nb_samples = X.shape[1]
         
         # Compute the loss
-        dL_dA = loss_derivative(Y, A[-1])
+        dL_dA = loss_derivative(Y, y_hat)
         dA_dZ = gder(Z[-1])
         delta = dL_dA * dA_dZ
         
@@ -126,7 +126,7 @@ def backpropagation(nb_layers, X, Y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_
     
 ##### Update the weights and biases
 
-def update_weights(W, b, grad_W, grad_b, learning_rate):
+def update_parameters(W, b, grad_W, grad_b, learning_rate):
     for i in range(len(W)):
         W[i] -= learning_rate * grad_W[i]
         b[i+1] -= learning_rate * grad_b[i]

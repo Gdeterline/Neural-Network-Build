@@ -142,4 +142,5 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         W, b = update_parameters(W, b, grad_W, grad_b, learning_rate)
         
         if i % 100 == 0:
-            print(f"Epoch {i} - Loss: {loss(y, y_hat, X.shape[1])}")
+            print(f"Epoch {i} - Loss: {loss(y, y_hat)}")
+            

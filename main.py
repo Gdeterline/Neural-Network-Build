@@ -67,10 +67,12 @@ def leaky_relu_derivative(x):
 # g refers to the activation function. Default is sigmoid
 
 def feed_forward(nb_layers, X, W, b, g=sigmoid):
-    
+    print("Assertion going on")
+    assert len(X.T[0]) == len(W[0][0]), "Expected shape of X: number of samples in line, number of features in column"
+    print("Assertation value ok")
     # Initialize the input layer
     A = [0 for i in range(nb_layers)]
-    A[0] = X
+    A[0] = X.T
     Z = [0 for i in range(0, nb_layers)]
     Z[0] = A[0]
     
@@ -143,4 +145,4 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         
         if i % 100 == 0:
             print(f"Epoch {i} - Loss: {loss(y, y_hat)}")
-            
+

@@ -79,6 +79,11 @@ def feed_forward(nb_layers, X, W, b, g=sigmoid):
     
     # Neuron values updated with the forward pass
     for i in range(1, nb_layers):
+        
+        print(W[i-1].shape) # debugging purposes
+        print(A[i-1].shape) # debugging purposes
+        print(A[i-1]) # debugging purposes
+        
         Z[i] = W[i-1] @ A[i-1] + b[i]
         A[i] = g(Z[i])
     return A, Z, A[-1]
@@ -132,7 +137,7 @@ def backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_
 def update_parameters(W, b, grad_W, grad_b, learning_rate):
     for i in range(len(W)):
         W[i] = W[i] - learning_rate * grad_W[i]
-        b[i+1] = b[i+1] - learning_rate * grad_b[i]
+        b[i+1] = b[i+1] - learning_rate * grad_b[i+1]
     return W, b
 
 def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder=sigmoid_derivative, loss=mean_squared_error, loss_derivative=mean_squared_error_derivative):
@@ -152,7 +157,10 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         A, Z, y_hat = feed_forward(nb_layers, X, W, b, g)
         grad_W, grad_b = backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g, gder, loss_derivative)
         W, b = update_parameters(W, b, grad_W, grad_b, learning_rate)
-        
+        print("Wff: ", W)
+        print("bff: ", b)
+        print(i)
+                
         if i % 100 == 0:
             print(f"Epoch {i} - Loss: {loss(y, y_hat, nb_samples)}")
             Epochs.append(i)

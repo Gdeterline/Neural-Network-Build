@@ -25,6 +25,7 @@ def init_layers(nb_layers, nb_neurons):
     for i in range(0, nb_layers-1):
         W.append(np.random.randn(nb_neurons[i+1], nb_neurons[i]))
         b.append(np.random.randn(nb_neurons[i+1], 1))
+    print("Expected number of features: ", len(W[0][0]))
     return W, b
 
 
@@ -68,7 +69,7 @@ def leaky_relu_derivative(x):
 
 def feed_forward(nb_layers, X, W, b, g=sigmoid):
     print("Assertion going on")
-    assert len(X.T[0]) == len(W[0][0]), "Expected shape of X: number of samples in line, number of features in column"
+    assert len(X[0]) == len(W[0][0]), "Expected shape of X: number of samples in line, number of features in column"
     print("Assertation value ok")
     # Initialize the input layer
     A = [0 for i in range(nb_layers)]
@@ -130,12 +131,21 @@ def backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_
 
 def update_parameters(W, b, grad_W, grad_b, learning_rate):
     for i in range(len(W)):
-        W[i] -= learning_rate * grad_W[i]
-        b[i+1] -= learning_rate * grad_b[i]
+        W[i] = W[i] - learning_rate * grad_W[i]
+        b[i+1] = b[i+1] - learning_rate * grad_b[i]
     return W, b
 
 def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder=sigmoid_derivative, loss=mean_squared_error, loss_derivative=mean_squared_error_derivative):
     
+    Epochs = []
+    Losses = []
+    nb_samples = len(X)
+
+    print(X)
+    print(type(X))
+    print(X.shape)
+
+    #### Improvement suggestions - automatise the number of neurons in the input layer based on the number of features of the input data
     W, b = init_layers(nb_layers, nb_neurons)
     
     for i in range(epochs):
@@ -144,5 +154,7 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         W, b = update_parameters(W, b, grad_W, grad_b, learning_rate)
         
         if i % 100 == 0:
-            print(f"Epoch {i} - Loss: {loss(y, y_hat)}")
+            print(f"Epoch {i} - Loss: {loss(y, y_hat, nb_samples)}")
+            Epochs.append(i)
+            Losses.append(loss(y, y_hat, nb_samples))
 

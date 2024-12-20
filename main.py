@@ -23,8 +23,8 @@ def init_layers(nb_layers, nb_neurons):
     b = [np.zeros((nb_neurons[0], 1))]
     
     for i in range(0, nb_layers-1):
-        W.append(np.random.randn(nb_neurons[i+1], nb_neurons[i]))
-        b.append(np.random.randn(nb_neurons[i+1], 1))
+        W.append(np.random.randn(nb_neurons[i+1], nb_neurons[i])*np.sqrt(2/nb_neurons[i]))
+        b.append(np.zeros(nb_neurons[i+1]))
     print("Expected number of features: ", len(W[0][0]))
     return W, b
 
@@ -49,8 +49,8 @@ def softmax(x):
 
 ###### Derivatives of the activation functions
 
-def sigmoid_derivative(x):
-    return x*(1-x)
+def sigmoid_derivative(x, sigmoid=sigmoid):
+    return sigmoid(x)*(1-sigmoid(x))
 
 def tanh_derivative(x):
     return 1 - np.tanh(x)**2
@@ -160,9 +160,13 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         print("Wff: ", W)
         print("bff: ", b)
         print(i)
+        Epochs.append(i)
+        Losses.append(loss(y, y_hat, nb_samples))
+    return Epochs, Losses
+
                 
-        if i % 100 == 0:
+"""         if i % 100 == 0:
             print(f"Epoch {i} - Loss: {loss(y, y_hat, nb_samples)}")
             Epochs.append(i)
             Losses.append(loss(y, y_hat, nb_samples))
-
+ """

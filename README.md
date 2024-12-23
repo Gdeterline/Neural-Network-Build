@@ -108,9 +108,9 @@ The training process is usually divided into several steps:
 
 In order to build a neural network, we need to define the following notations:
 
-- **L**: the number of layers of the neural network. 
+- **nb_layers**: the number of layers of the neural network. 
 
-- **n**: the list of the number of neurons in each layer of the neural network, which is a list of integers of length L. The value of n[0] is the number of features of the input data X.
+- **nb_neurons**: the list of the number of neurons in each layer of the neural network, which is a list of integers of length nb_layers. The value of n[0] is the number of features of the input data X.
 
 - **g**: the activation function of the neural network.
 

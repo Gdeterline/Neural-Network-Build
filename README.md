@@ -76,11 +76,11 @@ Here's an example of what a neural network looks like :
   <img src=./images/nn_image.jpg?raw=true alt="NN_example", width="985"/>
 </p>
 
-<h1 style="font-size: 6px">
+<h6 style="font-size: 10px">
   <p align="right">
     <ins>Source of image:</ins> PyImageSearch
   </p>
-</h1>
+</h6>
 
 
 ### Neural Network <a name="neural-network"></a>

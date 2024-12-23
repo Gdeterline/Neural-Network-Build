@@ -23,9 +23,9 @@ def init_layers(nb_layers, nb_neurons):
     b = [np.zeros((nb_neurons[0], 1))]
     
     for i in range(0, nb_layers-1):
-        W.append(np.random.randn(nb_neurons[i+1], nb_neurons[i])*np.sqrt(2/nb_neurons[i]))
+        W.append(np.random.randn(nb_neurons[i+1], nb_neurons[i])*np.sqrt(2/nb_neurons[i])) # 
         b.append(np.zeros(nb_neurons[i+1]))
-    print("Expected number of features: ", len(W[0][0]))
+    #print("Expected number of features: ", len(W[0][0]))
     return W, b
 
 
@@ -80,9 +80,9 @@ def feed_forward(nb_layers, X, W, b, g=sigmoid):
     # Neuron values updated with the forward pass
     for i in range(1, nb_layers):
         
-        print(W[i-1].shape) # debugging purposes
-        print(A[i-1].shape) # debugging purposes
-        print(A[i-1]) # debugging purposes
+        #print(W[i-1].shape) # debugging purposes
+        #print(A[i-1].shape) # debugging purposes
+        #print(A[i-1]) # debugging purposes
         
         Z[i] = W[i-1] @ A[i-1] + b[i]
         A[i] = g(Z[i])

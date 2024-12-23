@@ -6,7 +6,7 @@ This project aims at creating a neural network from scratch, to apprehend not on
 
 1. [Introduction](#introduction)
     
-    1.1. [Why build a Neural Network from scratch?](#why-building-a-neural-network-from-scratch)
+    1.1. [Why build a Neural Network from scratch?](#why-build-a-neural-network-from-scratch)
     
     1.2. [What is the goal of this project?](#what-is-the-goal-of-this-project)
 
@@ -24,6 +24,8 @@ This project aims at creating a neural network from scratch, to apprehend not on
     
     2.6. [Backpropagation](#backpropagation)
 
+3. [Implementing and testing](#implementing-and-testing)
+
 3. [Testing Data](#testing-data)
 
 4. [First batch of results](#results)
@@ -37,7 +39,7 @@ This project aims at creating a neural network from scratch, to apprehend not on
 
 ## Introduction <a name="introduction"></a>
 
-### Why build a Neural Network from scratch? <a name="why-building-a-neural-network-from-scratch"></a>
+### Why build a Neural Network from scratch? <a name="why-build-a-neural-network-from-scratch"></a>
 
 I'm really into data and AI, so I chose to work on data science projects on the side. Among the algorithms to learn are neural networks.
 I believe that building a neural network from scratch is a great way to understand how it works. It allows you to apprehend the theoretical part but also the practical part. It is a great way to understand the different components of a neural network and how they interact with each other.
@@ -268,6 +270,114 @@ This means testing is essential here. There are several ways to test the backpro
 - The most common way is to use the *gradient checking method*. This method consists in comparing the gradients calculated by the backpropagation algorithm with the gradients calculated by the finite difference method. If the gradients are close enough, then the backpropagation algorithm has good chances of being correct. If not, then the backpropagation algorithm needs to be fixed. We will calculate the relative error between the gradients calculated by the backpropagation algorithm and the gradients calculated by the finite difference method. A good threshold for the relative error is $10^{-7}$.
 
 - Another way to test the backpropagation algorithm is to do an *overfitting test*. This test consists in training the neural network on a very small dataset, and checking if the loss function decreases with a big number of epochs. If the loss function decreases, then the backpropagation algorithm is working. If not, then the backpropagation algorithm needs to be fixed.
+
+## Implementing and testing <a name="implementing-and-testing"></a>
+
+The implementation consists of the following functions:
+
+#### **_init_layers_**: 
+
+| Argument n° | Argument Name | Argument description |
+|:-----------:|:-------------:|:--------------------|
+|1|nb_layers |Number of layers within the neural network (including both the input and output layers). There may be some changes to automatise the input layer later in the project|
+|2|nb_neurons|List of the number of neurons per layer. It includes both the input and output layers once again. Example: if nb_neurons[1] = 3, there will be 3 neurons in the first hidden layer of the NN |
+
+| Return variable n° | Variable Name | Variable description |
+|:-----------:|:-------------:|:--------------------|
+|1|W|Initialised list of Weight matrices. Default initialisation is Normal Xavier. The matrices are of shape (nb_neurons[i+1], nb_neurons[i]) for a giver layer i|
+|2|b|The list of initialised biais matrices. They are all set to 0. It is important to note that the values themselves do not matter much, as long as they are all the same. The matrices are of shape (nb_neurons[i], 1).|
+
+
+**NB**: At first, we initialised weights with random values with the np.random.randn. But when it is done with a sigmoid, which is our default activation function, this can be problematic. Indeed, the randn function generates an array of shape (nb_neurons + 1, nb_neurons) for a given layer, filled with random values as per standard normal distribution. The mean value is of 0 and the variance of 1, so the weights will be centered around 0, where the activation function is almost linear. 
+
+<p align="center">
+  <img src=./images/sigmoid_function.png?raw=true alt="Sigmoid Function Plot"/>
+</p>
+
+
+Yet we want to have some non-linearity within the neural network, and therefore have to choose another initialisation method. This explains the use of Xavier initialisation. 
+
+
+<ins>Improvement suggestions:</ins> 
+
+- Automatising the input layer based on the input dataset (for the number of neurons in the input layer to match the number of features).
+- Leaving the choice of the initialisation method to the user (Uniform Xavier, Normal Xavier, etc.).
+
+
+#### **_feed_forward_**:
+
+| Argument n° | Argument Name | Argument description |
+|:-----------:|:-------------:|:--------------------|
+|1|nb_layers|This argument should no longer be used since we have b as argument(and therefore len(b) which matches nb_layers).|
+|2|X|The input dataset. X is expected to be of type <class 'numpy.ndarray'>, and of shape (nb_samples, nb_features)|
+|3|W|The initialised list of weights. See _init_layers_ for further explanations.|
+|4|b|The initialised list of biaises. See _init_layers_ for further explanations.|
+|5|g|The activation function required by the user for the model. _Default_ is set to Sigmoid function.|
+
+
+| Return variable n° | Variable Name | Variable description |
+|:-----------:|:-------------:|:--------------------|
+|1|A|The values attributed to each node, after applying the activation function.|
+|2|Z|The values attributed to each node, before applying the activation function.|
+|3|A[-1]|The values attributed to each node of the output layer. This matches $\hat{Y}$.|
+
+
+<ins>Improvement suggestions:</ins>
+- Use len(b) instead of taking nb_layers as argument.
+
+#### **_backpropagation_**:
+
+| Argument n° | Argument Name | Argument description |
+|:-----------:|:-------------:|:--------------------|
+||||
+||||
+||||
+||||
+||||
+||||
+||||
+||||
+||||
+||||
+||||
+
+
+| Return variable n° | Variable Name | Variable description |
+|:-----------:|:-------------:|:--------------------|
+||||
+||||
+
+<ins>Improvement suggestions:</ins>
+
+
+#### **_update_parameters_**:
+
+| Argument n° | Argument Name | Argument description |
+|:-----------:|:-------------:|:--------------------|
+||||
+||||
+||||
+||||
+||||
+
+
+| Return variable n° | Variable Name | Variable description |
+|:-----------:|:-------------:|:--------------------|
+||||
+||||
+
+<ins>Improvement suggestions:</ins>
+
+
+
+#### **_train_nn_**:
+
+
+#### **_activation functions and derivatives_**: 
+#### **_loss functions and derivatives_**:
+
+
+
 
 ## First batch of results <a name="results"></a>
 

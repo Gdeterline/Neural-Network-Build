@@ -146,10 +146,6 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
     Losses = []
     nb_samples = len(X)
 
-    print(X)
-    print(type(X))
-    print(X.shape)
-
     #### Improvement suggestions - automatise the number of neurons in the input layer based on the number of features of the input data
     W, b = init_layers(nb_layers, nb_neurons)
     
@@ -157,9 +153,6 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         A, Z, y_hat = feed_forward(nb_layers, X, W, b, g)
         grad_W, grad_b = backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g, gder, loss_derivative)
         W, b = update_parameters(W, b, grad_W, grad_b, learning_rate)
-        print("Wff: ", W)
-        print("bff: ", b)
-        print(i)
         Epochs.append(i)
         Losses.append(loss(y, y_hat, nb_samples))
     return Epochs, Losses

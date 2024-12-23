@@ -73,8 +73,14 @@ In this section, I will explain the different notions that are important to unde
 Here's an example of what a neural network looks like : 
 
 <p align="center">
-  <img src=./images/nn_image.jpg?raw=true alt="NN_example"/>
+  <img src=./images/nn_image.jpg?raw=true alt="NN_example", width="985"/>
 </p>
+
+<h1 style="font-size: 12px">
+  <p align="right">
+    <ins>Source of image:</ins> PyImageSearch
+  </p>
+</h1>
 
 
 ### Neural Network <a name="neural-network"></a>

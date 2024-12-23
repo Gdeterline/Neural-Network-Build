@@ -108,7 +108,7 @@ def mean_squared_error_derivative(y, y_hat):
 
 ##### Backpropagation
 
-def backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_derivative, loss_derivative=mean_squared_error_derivative):
+def backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_derivative, lossder=mean_squared_error_derivative):
         
         # Initialize the gradients
         grad_W = [np.zeros_like(w) for w in W]
@@ -118,7 +118,7 @@ def backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g=sigmoid, gder=sigmoid_
         nb_samples = X.shape[1]
         
         # Compute the loss
-        dL_dA = loss_derivative(y, y_hat)
+        dL_dA = lossder(y, y_hat)
         dA_dZ = gder(Z[-1])
         delta = dL_dA * dA_dZ
         
@@ -140,7 +140,7 @@ def update_parameters(W, b, grad_W, grad_b, learning_rate):
         b[i+1] = b[i+1] - learning_rate * grad_b[i+1]
     return W, b
 
-def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder=sigmoid_derivative, loss=mean_squared_error, loss_derivative=mean_squared_error_derivative):
+def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder=sigmoid_derivative, loss=mean_squared_error, lossder=mean_squared_error_derivative):
     
     Epochs = []
     Losses = []
@@ -151,7 +151,7 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
     
     for i in range(epochs):
         A, Z, y_hat = feed_forward(nb_layers, X, W, b, g)
-        grad_W, grad_b = backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g, gder, loss_derivative)
+        grad_W, grad_b = backpropagation(nb_layers, X, y, W, b, A, Z, y_hat, g, gder, lossder)
         W, b = update_parameters(W, b, grad_W, grad_b, learning_rate)
         Epochs.append(i)
         Losses.append(loss(y, y_hat, nb_samples))

@@ -70,14 +70,21 @@ To summarise the goal of this project, I want to build a neural network that is 
 
 In this section, I will explain the different notions that are important to understand when building a neural network.
 
+Here's an example of what a neural network looks like : 
+
+<p align="center">
+  <img src=./images/nn_image.jpg?raw=true alt="NN_example"/>
+</p>
+
+
 ### Neural Network <a name="neural-network"></a>
 
 A neural network is a set of algorithms, modeled after the human brain, that is designed to recognize patterns. 
 It is composed of layers of neurons, each of which applies an activation function to the weighted sum of its inputs.
 These layers are divided into three types:
-- the input layer, which receives the input data
+- the input layer, which receives the input data. The number of nodes of the input layer must match the number of features of the input data.
 - the hidden layers, which process the data
-- the output layer, which produces the output data
+- the output layer, which produces the output data, and therefore, the predictions.
 The idea is to do a forward pass, where the input data is passed through the network, and the output is predicted.
 Then, the neural network uses a loss function to measure the difference between the predicted output and the actual output. The goal is to minimize this difference by adjusting the weights of the neurons.
 This is done through the backpropagation algorithm, which calculates the gradient of the loss function with respect to the weights and biaises of the neurons, and updates the weights/biaises accordingly.
@@ -132,6 +139,11 @@ $$
 $$
 
 
+<p align="center">
+  <img src=./images/sigmoid_function.png?raw=true alt="Sigmoid Function Plot"/>
+</p>
+
+
 - **the Tanh Function**
 
     <ins>Use Case:</ins> Often preferred in hidden layers when inputs can be negative.
@@ -139,6 +151,11 @@ $$
 $$
 \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
 $$
+
+
+<p align="center">
+  <img src=./images/tanh_function.png?raw=true alt="Tanh Function Plot"/>
+</p>
 
 
 - **the ReLU Function**
@@ -150,6 +167,12 @@ f(x) = \max(0, x)
 $$
 
 
+<p align="center">
+  <img src=./images/relu_function.png?raw=true alt="ReLU Function Plot"/>
+</p>
+
+
+
 - **the Leaky ReLU Function**
 
     <ins>Use Case:</ins> A variant of the ReLU function that allows a small gradient when the input is negative.
@@ -157,6 +180,11 @@ $$
 $$
 f(x) = \max(0.01x, x)
 $$
+
+
+<p align="center">
+  <img src=./images/leaky_relu_function.png?raw=true alt="Leaky ReLU Function Plot"/>
+</p>
 
 
 - **the Softmax Function**
@@ -280,7 +308,7 @@ The implementation consists of the following functions:
 | Argument n° | Argument Name | Argument description |
 |:-----------:|:-------------:|:--------------------|
 |1|nb_layers |Number of layers within the neural network (including both the input and output layers). There may be some changes to automatise the input layer later in the project|
-|2|nb_neurons|List of the number of neurons per layer. It includes both the input and output layers once again. Example: if nb_neurons[1] = 3, there will be 3 neurons in the first hidden layer of the NN |
+|2|nb_neurons|List of the number of neurons per layer. It includes both the input and output layers once again. Example: if nb_neurons[1] = 3, there will be 3 neurons in the first hidden layer of the NN.|
 
 | Return variable n° | Variable Name | Variable description |
 |:-----------:|:-------------:|:--------------------|
@@ -288,10 +316,13 @@ The implementation consists of the following functions:
 |2|b|The list of initialised biais matrices. They are all set to 0. It is important to note that the values themselves do not matter much, as long as they are all the same. The matrices are of shape (nb_neurons[i], 1).|
 
 
-**NB**: At first, we initialised weights with random values with the np.random.randn. But when it is done with a sigmoid, which is our default activation function, this can be problematic. Indeed, the randn function generates an array of shape (nb_neurons + 1, nb_neurons) for a given layer, filled with random values as per standard normal distribution. The mean value is of 0 and the variance of 1, so the weights will be centered around 0, where the activation function is almost linear. 
+**NB**: At first, we initialised weights with random values with the np.random.randn. But when it is done with a sigmoid, which is our default activation function, this can be problematic. Indeed, the randn function generates an array of shape (nb_neurons + 1, nb_neurons) for a given layer, filled with random values as per standard normal distribution. The mean value is of 0 and the variance of 1, so the weights will be centered around 0, where the activation function is almost linear.
+
+If we take a look at the sigmoid function, the range of values between -0.8 and 0.8 seems almost linear.
+
 
 <p align="center">
-  <img src=./images/sigmoid_function.png?raw=true alt="Sigmoid Function Plot"/>
+  <img src=./images/sigmoid_function_.png?raw=true alt="Sigmoid Function Plot"/>
 </p>
 
 
@@ -317,8 +348,8 @@ Yet we want to have some non-linearity within the neural network, and therefore 
 
 | Return variable n° | Variable Name | Variable description |
 |:-----------:|:-------------:|:--------------------|
-|1|A|The values attributed to each node, after applying the activation function.|
-|2|Z|The values attributed to each node, before applying the activation function.|
+|1|A|The list of values matrix attributed to each node, after applying the activation function.|
+|2|Z|The list of values matrix attributed to each node, before applying the activation function.|
 |3|A[-1]|The values attributed to each node of the output layer. This matches $\hat{Y}$.|
 
 
@@ -329,54 +360,79 @@ Yet we want to have some non-linearity within the neural network, and therefore 
 
 | Argument n° | Argument Name | Argument description |
 |:-----------:|:-------------:|:--------------------|
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
-||||
+|1|nb_layers|See _init_layers_ for more information. Once again, this argument should not be needed|
+|2|X|Input dataset|
+|3|y|The true values of the input dataset. These will be used to compare $\hat{Y}$ to y through a given loss function.|
+|4|W|The initialised list of weights. See _init_layers_ for further explanations.|
+|5|b|The initialised list of biaises. See _init_layers_ for further explanations.|
+|6|A|The list of values matrix attributed to each node, after applying the activation function.|
+|7|Z|The list of values matrix attributed to each node, before applying the activation function.|
+|8|y_hat|The predicted output value. Matches A[-1]|
+|9|g|The activation function required by the user for the model.|
+|10|gder|The derivative of the activation function required by the user for the model.|
+|11|loss|The loss function chosen to calculate the error of the NN|
+|12|lossder|The derivative of the loss function chosen to calculate -then minimise- the error of the NN.|
 
 
 | Return variable n° | Variable Name | Variable description |
 |:-----------:|:-------------:|:--------------------|
-||||
-||||
+|1|grad_W|The list of weights gradients matrices after application of the backpropagation algorithm. It will then be used to update the weight values of the NN.|
+|2|grad_b|The list of bias gradients matrices after application of the backpropagation algorithm. It will then be used to update the bias values of the NN.|
 
 <ins>Improvement suggestions:</ins>
-
+- Use len(b) instead of taking nb_layers as argument.
+- Need to find more to optimize the code and so the results.
 
 #### **_update_parameters_**:
 
 | Argument n° | Argument Name | Argument description |
 |:-----------:|:-------------:|:--------------------|
-||||
-||||
-||||
-||||
-||||
+|1|W|The initialised list of weights. See _init_layers_ for further explanations.|
+|2|b|The initialised list of biaises. See _init_layers_ for further explanations.|
+|3|grad_W|The list of weights gradients matrices after application of the backpropagation algorithm. It will then be used to update the weight values of the NN.|
+|4|grad_b|The list of bias gradients matrices after application of the backpropagation algorithm. It will then be used to update the bias values of the NN.|
+|5|learning_rate|The learning rate determines how far the neural network weights change within the context of optimization while minimizing the loss function.|
 
 
 | Return variable n° | Variable Name | Variable description |
 |:-----------:|:-------------:|:--------------------|
-||||
-||||
+|1|W|The updated list of weight matrices, after the given iteration of the backpropagation algorithm.|
+|2|b|The updated list of bias matrices, after the given iteration of the backpropagation algorithm.|
 
 <ins>Improvement suggestions:</ins>
-
+- Add a learning rate decay functionnality to optimize model performance.
 
 
 #### **_train_nn_**:
+
+| Argument n° | Argument Name | Argument description |
+|:-----------:|:-------------:|:--------------------|
+|1|nb_layers|See _init_layers_ for more information. Once again, this argument should not be needed|
+|2|X|Input dataset|
+|3|y|The true values of the input dataset. These will be used to compare $\hat{Y}$ to y through a given loss function.|
+|4|nb_neurons|List of the number of neurons per layer. It includes both the input and output layers once again. Example: if nb_neurons[1] = 3, there will be 3 neurons in the first hidden layer of the NN.|
+|5|learning_rate|The learning rate determines how far the neural network weights change within the context of optimization while minimizing the loss function.|
+|6|epochs|An epoch is when all the training data is used at once and is defined as the total number of iterations of all the training data in one cycle for training the machine learning model.|
+|9|g|The activation function required by the user for the model.|
+|10|gder|The derivative of the activation function required by the user for the model.|
+|11|loss|The loss function chosen to calculate the error of the NN|
+|12|lossder|The derivative of the loss function chosen to calculate -then minimise- the error of the NN.|
+
+
+| Return variable n° | Variable Name | Variable description |
+|:-----------:|:-------------:|:--------------------|
+|1|Epochs|List of all epochs. X axis if we print loss = f(epoch).|
+|2|Losses|List of the loss values for each epochs. Useful to debug and plot the training trend of the NN.|
+
+<ins>Improvement suggestions:</ins>
+- Need to work on i % 100 == 0, in order to minimize calculation cost (= time).
 
 
 #### **_activation functions and derivatives_**: 
 #### **_loss functions and derivatives_**:
 
 
+### **Time to do some testing !**
 
 
 ## First batch of results <a name="results"></a>

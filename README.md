@@ -434,10 +434,30 @@ Yet we want to have some non-linearity within the neural network, and therefore 
 
 
 #### **_activation functions and derivatives_**: 
+
+There are several activation functions that can be used in a neural network. They are listed above, in section [Activation Function](#activation-function).
+
 #### **_loss functions and derivatives_**:
+
+There are several loss functions that can be used in a neural network. They are listed above, in section [Loss Function](#loss-function).
 
 
 ### **Time to do some testing !**
+
+### init_layers
+
+To test the init_layers function, we will proceed as follows:
+- try to initialise the weights and biaises of a neural network with 3 layers, and a given number of neurons in each layer.
+- check if the weights and biaises are correctly initialised. This can be done by checking the shape of the weights and biaises. 
+
+- then, generalize the test to a neural network with any number of layers, and any number of neurons in each layer.
+- check if the weights and biaises are correctly initialised. This can be done by checking the shape of the weights and biaises. Since the weights are initialised with the Xavier initialisation, the mean of the weights should be close to 0, and the variance of the weights should be close to 1. The biaises are initialised with 0, so the mean of the biaises should be 0.
+
+The tests are done in the nnTesting.ipynb notebook. The results are positive, as the weights and biaises are correctly initialised.
+We can proceed to the next step, which is the feed-forward algorithm.
+
+### feed_forward
+
 
 
 ## First batch of results <a name="results"></a>

@@ -24,7 +24,7 @@ def init_layers(nb_layers, nb_neurons):
     
     for i in range(0, nb_layers-1):
         W.append(np.random.randn(nb_neurons[i+1], nb_neurons[i])*np.sqrt(2/nb_neurons[i])) # 
-        b.append(np.zeros(nb_neurons[i+1]))
+        b.append(np.zeros((nb_neurons[i+1], 1)))
     #print("Expected number of features: ", len(W[0][0]))
     return W, b
 
@@ -68,9 +68,9 @@ def leaky_relu_derivative(x):
 # g refers to the activation function. Default is sigmoid
 
 def feed_forward(nb_layers, X, W, b, g=sigmoid):
-    print("Assertion going on")
+    #print("Assertion going on")
     assert len(X[0]) == len(W[0][0]), "Expected shape of X: number of samples in line, number of features in column"
-    print("Assertation value ok")
+    #print("Assertation value ok")
     # Initialize the input layer
     A = [0 for i in range(nb_layers)]
     A[0] = X.T

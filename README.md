@@ -441,6 +441,33 @@ There are several activation functions that can be used in a neural network. The
 
 There are several loss functions that can be used in a neural network. They are listed above, in section [Loss Function](#loss-function).
 
+We need some ranges of values indicating good performance of the neural network for the testing that will follow. These depend on the dataset used, and the loss function chosen.
+
+##### **Binary Cross-Entropy Loss (BCE)**
+
+| **Loss Value** | **Interpretation**                       |
+|----------------|------------------------------------------|
+| `< 0.01`       | Excellent (near-perfect predictions).    |
+| `0.01 - 0.05`  | Very Good (minor errors in predictions). |
+| `0.05 - 0.1`   | Good (moderate prediction quality).      |
+| `0.1 - 0.5`    | Average (room for improvement).          |
+| `0.5 - 1.0`    | Poor (significant prediction errors).    |
+| `> 1.0`        | Very Poor (model needs major adjustments). |
+
+
+##### **Mean Squared Error (MSE)**
+
+| **Loss Value** | **Interpretation**                        |
+|----------------|-------------------------------------------|
+| `< 0.01`       | Excellent (predictions very close to targets). |
+| `0.01 - 0.1`   | Very Good (small prediction errors).      |
+| `0.1 - 0.5`    | Good (moderate prediction errors).        |
+| `0.5 - 1.0`    | Average (noticeable prediction errors).   |
+| `1.0 - 5.0`    | Poor (large prediction errors).           |
+| `> 5.0`        | Very Poor (model not learning effectively).|
+
+<ins>NB:</ins> These ranges of values were provided by ChatGPT, and are not to be taken as absolute truth. They are just indicative values, and can be adjusted depending on the dataset used. Let's start with these values, and adjust them if necessary.
+
 
 ### **Time to do some testing !**
 

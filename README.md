@@ -485,9 +485,97 @@ We can proceed to the next step, which is the feed-forward algorithm.
 
 ### feed_forward
 
+To test the feed_forward function, we will proceed as follows:
+- try to apply the feed-forward algorithm to a neural network with 3 layers, and a given number of neurons in each layer. We will use the sigmoid function as the activation function. We will used data for which we have the expected output, weight values, bias values, etc, so we can check if the calculation of the neural network is correct. We can also check if the shapes of each matrix are correct.
+- the shapes of the matrices should provide enough indication of if the _feed_forward_ function is working correctly. 
 
+### backpropagation
+
+To test the backpropagation function, we need to implement the _train_ function. It is pretty hard to check directly if the backpropagation algorithm is working correctly, as it is a complex algorithm. 
+- The best way to check if the backpropagation algorithm is working correctly is to check if the loss function decreases with a big number of epochs. If the loss function decreases, then the backpropagation algorithm is working. If not, then the backpropagation algorithm needs to be fixed.
+- Then, we can do the overfitting test mentionned earlier.
 
 ## First batch of results <a name="results"></a>
+
+We applied these tests to the neural network. In this part, we will comment the tests ran on the training of the neural network.
+
+### Test 1 - Overfitting test
+
+| **Input Dataset** | **Value**                        | **Description**                        |
+|----------------|-------------------------------------------|----------------|
+|X|np.array([[1, 2]])|The dataset consists in only one sample, with two features.|
+|y|np.array([1])|The true value of the input dataset.|
+
+| **Hyperparameters** | **Value**                        | **Description**                        |
+|----------------|-------------------------------------------|----------------|
+|nb_layers|4|The number of layers of the neural network.|
+|nb_neurons|[2, 2, 2, 1]|The list of the number of neurons in each layer of the neural network.|
+|learning_rate|0.1|The learning rate of the neural network.|
+|epochs|10000|The number of epochs of the neural network. This number is big, as we want to see if the loss function decreases with a big number of epochs.|
+|g|sigmoid|The activation function of the neural network.|
+|gder|sigmoid_der|The derivative of the activation function of the neural network.|
+|loss|bce|The loss function of the neural network.|
+|lossder|bce_der|The derivative of the loss function of the neural network.|
+
+
+Expectations: The neural network should be able to learn the input dataset, and predict the true value of the input dataset. The loss function should decrease with a big number of epochs. The loss function should be close to 0. Even more, knowing that there should be overfitting on the dataset, the loss function should be very close to 0.
+
+### Results - Test 1
+
+The loss value is of 0.0007998200708522072. This is a very good result, as the loss function is close to 0. This means that the neural network is able to learn the input dataset, and predict the true value of the input dataset. 
+
+<p align="center">
+  <img src=./images/loss_one_sample.png?raw=true alt="Loss One Sample"/>
+</p>
+
+The loss function also decreases with a big number of epochs, which means that the backpropagation algorithm is working.
+
+### Test 2 - Several samples test
+
+We need to ensure that the neural network is able to learn from several samples, and not only one. We will use the same hyperparameters as in the first test, but we will change the input dataset to have several samples.
+
+| **Input Dataset** | **Value**                        | **Description**                        |
+|----------------|-------------------------------------------|----------------|
+|X|np.array([[1, 2], [2, 3], [7, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [17, 2]])|The dataset consists in 9 samples, with two features. The true values match the outliers in the X dataset, so the neural network should learn without any problem.|
+|y|np.array([1, 1, 0, 1, 1, 1, 1, 1, 0])|The true values of the input dataset.|
+
+Expectations: The neural network should be able to learn the input dataset, and predict the true values of the input dataset. The loss function should decrease with a big number of epochs. The loss function should still be close to 0.
+
+### Results - Test 2
+
+The loss value is of 0.00046445927218949633. This is a very good result, as the loss function is close to 0. This means that the neural network is able to learn the input dataset, and predict the true values of the input dataset.
+
+<p align="center">
+  <img src=./images/loss_multiple_samples.png?raw=true alt="Loss Several Samples"/>
+</p>
+
+The loss function also decreases with a big number of epochs, which means that the backpropagation algorithm is working.
+
+### Test 3 - Several samples test with outliers
+
+Here, we will use the same hyperparameters as in the first test, but we will change the input dataset to have several samples, and add some outliers.
+
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5]])
+y = np.array([1, 0, 1, 0])
+
+| **Input Dataset** | **Value**                        | **Description**                        |
+|----------------|-------------------------------------------|----------------|
+|X|np.array([[1, 2], [2, 3], [3, 4], [4, 5]])|The dataset consists in 4 samples, with two features. There appears to be a logic in the X dataset|
+|y|np.array([1, 0, 1, 0])|The true values of the input dataset. They do not match the outliers in the X dataset, so the neural network should learn with some difficulty.|
+
+Expectations: The neural network should be able to learn the input dataset, and predict the true values of the input dataset. The loss function should decrease with a big number of epochs. The loss function should not be close to 0, as the outliers are not predicted by the neural network.
+
+### Results - Test 3
+
+The loss value is of 0.4802457983635456. This is a poor result, as expected. The loss function is not close to 0, which means that the neural network is not able to learn the input dataset, and predict the true values of the input dataset.
+We should be able, by working on the hyperparameters, to get a better result. We will do that on another database, more complete, to ensure the problem exists in real cases.
+
+<p align="center">
+  <img src=./images/loss_multiple_samples_outliers.png?raw=true alt="Loss Outliers"/>
+</p>
+
+The loss function also decreases with a big number of epochs, which means that the backpropagation algorithm is working.
+
 
 ## Optimization <a name="optimization"></a>
 

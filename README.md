@@ -26,8 +26,6 @@ This project aims at creating a neural network from scratch, to apprehend not on
 
 3. [Implementing and testing](#implementing-and-testing)
 
-3. [Testing Data](#testing-data)
-
 4. [First batch of results](#results)
 
 5. [Optimization](#optimization)
@@ -468,6 +466,25 @@ We need some ranges of values indicating good performance of the neural network 
 
 <ins>NB:</ins> These ranges of values were provided by ChatGPT, and are not to be taken as absolute truth. They are just indicative values, and can be adjusted depending on the dataset used. Let's start with these values, and adjust them if necessary.
 
+#### **_predict_**:
+
+| Argument n° | Argument Name | Argument description |
+|:-----------:|:-------------:|:--------------------|
+|1|X|Input dataset|
+|2|W|The list of weight matrices after training the NN.|
+|3|b|The list of bias matrices after training the NN.|
+|4|g|The activation function required by the user for the model.|
+
+| Return variable n° | Variable Name | Variable description |
+|:-----------:|:-------------:|:--------------------|
+|1|y_hat|The predicted output value. Matches A[-1]|
+
+<ins>Improvement suggestions:</ins>
+- Need to work on the predict function to make it more user-friendly.
+- Add a threshold to the predict function to make it more user-friendly.
+- Add a time limit to the predict function to make it more user-friendly.
+- Find a way so that it is not necessary to input W, b, and g to the predict function. Maybe by saving the model after training it. Or by using a class to build the neural network. The latter would be more complex, but also more efficient.
+- Need to add a way to evaluate the performance of the neural network. This can be done by calculating the accuracy of the neural network, the precision, the recall, the F1 score, etc.
 
 ### **Time to do some testing !**
 
@@ -551,6 +568,8 @@ The loss value is of 0.00046445927218949633. This is a very good result, as the 
 
 The loss function also decreases with a big number of epochs, which means that the backpropagation algorithm is working.
 
+We made a first batch of tests, and the results are very good. The neural network is able to learn the input dataset, and predict the true values of the input dataset. The predictions was done for X2 = np.array([[1, 2], [2, 3], [10, 4], [4, 5], [5, 6], [320, 7], [7, 8], [8, 9], [17, 2], [120, 3], [1, 2], [2, 3]]) and the predictions were [[1. 1. 0. 1. 1. 0. 1. 1. 0. 0. 1. 1.]], as expected. Though the test was simple, it was still successful. We need to test the neural network on more complex datasets, to ensure that the neural network is able to learn from them.
+
 ### Test 3 - Several samples test with outliers
 
 Here, we will use the same hyperparameters as in the first test, but we will change the input dataset to have several samples, and add some outliers.
@@ -575,6 +594,9 @@ We should be able, by working on the hyperparameters, to get a better result. We
 </p>
 
 The loss function also decreases with a big number of epochs, which means that the backpropagation algorithm is working.
+
+### Test 4 - Case of a more complex dataset - 
+
 
 
 ## Optimization <a name="optimization"></a>

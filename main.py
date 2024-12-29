@@ -155,7 +155,7 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         W, b = update_parameters(W, b, grad_W, grad_b, learning_rate)
         Epochs.append(i)
         Losses.append(loss(y, y_hat, nb_samples))
-    return Epochs, Losses
+    return Epochs, Losses, W, b
 
                 
 """         if i % 100 == 0:
@@ -163,3 +163,7 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
             Epochs.append(i)
             Losses.append(loss(y, y_hat, nb_samples))
  """
+
+def predict(X, W, b, g=sigmoid):
+    A, Z, y_hat = feed_forward(len(b), X, W, b, g)
+    return y_hat

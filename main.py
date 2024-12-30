@@ -55,8 +55,8 @@ def sigmoid_derivative(x, sigmoid=sigmoid):
 def tanh_derivative(x):
     return 1 - np.tanh(x)**2
 
-def relu_derivative(x):
-    return np.where(x <= 0, 0, 1)
+def relu_derivative(x, relu=relu):
+    return np.where(relu(x) <= 0, 0, 1)
 
 def leaky_relu_derivative(x):
     return np.where(x <= 0, 0.01, 1)
@@ -155,14 +155,13 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         W, b = update_parameters(W, b, grad_W, grad_b, learning_rate)
         Epochs.append(i)
         Losses.append(loss(y, y_hat, nb_samples))
-    return Epochs, Losses, W, b
-
                 
-"""         if i % 100 == 0:
+        if i % 100 == 0:
             print(f"Epoch {i} - Loss: {loss(y, y_hat, nb_samples)}")
             Epochs.append(i)
             Losses.append(loss(y, y_hat, nb_samples))
- """
+
+    return W, b, Epochs, Losses
 
 def predict(X, W, b, g=sigmoid):
     A, Z, y_hat = feed_forward(len(b), X, W, b, g)

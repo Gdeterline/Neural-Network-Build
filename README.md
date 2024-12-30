@@ -429,6 +429,7 @@ Yet we want to have some non-linearity within the neural network, and therefore 
 
 <ins>Improvement suggestions:</ins>
 - Need to work on i % 100 == 0, in order to minimize calculation cost (= time).
+- Could let the possibility to have different activation functions for each layer of the NN.
 
 
 #### **_activation functions and derivatives_**: 

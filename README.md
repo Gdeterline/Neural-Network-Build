@@ -602,7 +602,7 @@ We will use the Breast Cancer Wisconsin (Diagnostic) Data Set, which is a more c
 
 The dataset is available on the UCI Machine Learning Repository. It consists in 569 samples, with 30 features. The true values are 0 or 1, and indicate if the cancer is benign or malignant.
 
-The entire study is available in the [breast_cancer_classification.ipynb](#./breast_cancer_classification.ipynb) notebook. The results are very good, as the neural network is able to learn the input dataset, and predict the true values of the input dataset. 
+The entire study is available in the [breast_cancer_classification.ipynb](./breast_cancer_classification.ipynb) notebook. The results are very good, as the neural network is able to learn the input dataset, and predict the true values of the input dataset. 
 
 We split the dataset into a training set and a testing set, to evaluate the performance of the neural network on new data. The accuracy of the neural network on the training dataset is of 96.48% and the accuracy on the testing set is of 98.25%. This is a very good result, as the accuracy, in both cases, is close to 100%. This means that the neural network is able to generalize to new data. There is perhaps a little underfitting, but the results are still very good.
 

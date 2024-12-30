@@ -30,8 +30,6 @@ This project aims at creating a neural network from scratch, to apprehend not on
 
 5. [Optimization](#optimization)
 
-6. [Second batch of results](#results)
-
 7. [Conclusion](#conclusion)
 
 
@@ -598,9 +596,9 @@ The loss function also decreases with a big number of epochs, which means that t
 
 ### Test 4 - Case of a more complex dataset - Breast Cancer Wisconsin (Diagnostic) Data Set
 
-We will use the Breast Cancer Wisconsin (Diagnostic) Data Set, which is a more complex dataset. This will enable us to evaluate the performance of the neural network on a well known dataset. We can also compare its performance with other existing NNs, such as the ones from scikit-learn, TensorFlow, PyTorch, etc.
+We will use the Breast Cancer Wisconsin (Diagnostic) Data Set - downloaded from Kaggle -, which is a more complex dataset. This will enable us to evaluate the performance of the neural network on a well known dataset. We can also compare its performance with other existing NNs, such as the ones from scikit-learn, TensorFlow, PyTorch, etc.
 
-The dataset is available on the UCI Machine Learning Repository. It consists in 569 samples, with 30 features. The true values are 0 or 1, and indicate if the cancer is benign or malignant.
+The dataset consists in 569 samples, with 30 features. The true values are B or M, and indicate if the cancer is benign or malignant.
 
 The entire study is available in the [breast_cancer_classification.ipynb](./breast_cancer_classification.ipynb) notebook. The results are very good, as the neural network is able to learn the input dataset, and predict the true values of the input dataset. 
 

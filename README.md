@@ -26,9 +26,11 @@ This project aims at creating a neural network from scratch, to apprehend not on
 
 3. [Implementing and testing](#implementing-and-testing)
 
-4. [First batch of results](#results)
+4. [Performance Metrics](#performance-metrics)
 
-5. [Optimization](#optimization)
+5. [First batch of results](#results)
+
+6. [Optimization](#optimization)
 
 7. [Conclusion](#conclusion)
 
@@ -511,9 +513,75 @@ To test the backpropagation function, we need to implement the _train_ function.
 - The best way to check if the backpropagation algorithm is working correctly is to check if the loss function decreases with a big number of epochs. If the loss function decreases, then the backpropagation algorithm is working. If not, then the backpropagation algorithm needs to be fixed.
 - Then, we can do the overfitting test mentionned earlier.
 
+## Performance Metrics <a name="performance-metrics"></a>
+
+There are several performance metrics that measure how well the model achieves its objectives. These are important to follow, to evaluate the quality of the predictions.
+
+- **Accuracy**: Accuracy is a metric that measures how often a machine learning model correctly predicts the outcome.
+
+The formula is as follows : 
+
+$$
+Accuracy = \frac{Correct Predictions}{All Predictions} = \frac{TP + TN}{TP + TN + FP + FN}
+$$
+
+where:
+- $TP$: True Positives
+- $TN$: True Negatives
+- $FP$: False Positives
+- $FN$: False Negatives
+
+These values can be identified easily in a confusion matrix. Here is a visualisation of a confusion matrix for a binary problem.  
+  
+<p align="center">
+  <img src=./images/confusion_matrix_theory.png?raw=true alt="confusion_matrix_theory", width="600"/>
+</p>
+
+<p align="right">
+  <small><ins>Source of image:</ins> Evidently AI</small>
+</p>
+
+It ranges from 0 to 1, and can therefore be discussed in percentages
+
+Here are some ranges of accuracies to qualify the quality of the predictions: 
+
+| **Accuracy Range** | **Category** | **Description** | **Examples** |
+|-----------------------|-------------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------|
+| **Random Accuracy** | Baseline | Achieved by random guessing, depends on the number of classes. | `Binary: ~50%`, `10-class: ~10%` |
+| **Poor Accuracy** | Poor | Slightly better than random but far below acceptable for most use cases. | `Random Accuracy < x <= 60%` |
+| **Medium Accuracy** | Medium | Better than poor, not production-ready for most applications. | `60% < x <= 80%` |
+| **Good Accuracy** | Good | Suggests effective learning and possibly usable in practice, depending on the application. | `80% < x <= 90%` |
+| **Great Accuracy** | Excellent | Approaching perfection, often suitable for deployment but could indicate overfitting on training. | `x > 90%` |
+
+Accuracy can also reflect the ability of the neural network to generalize - and indicate if the model is underftting/overfitting.
+Here are some ranges of accuracy differences between the training and the testing samples:
+
+| **Training vs. Testing Accuracy Difference** | **Category** | **Description** |
+|-----------------------------------------------|----------------------|------------------------------------------------------------------------------------------------------|
+| `0% - 5%` | Well-Generalized | Balanced performance; the model is likely neither underfitting nor overfitting. |
+| `5% - 10%` | Mild Overfitting | Training accuracy is slightly higher than testing accuracy, indicating the model may overfit a bit. |
+| `10% - 20%` | Moderate Overfitting | Training accuracy is significantly higher than testing accuracy; overfitting is a clear issue. |
+| `>20%` | Severe Overfitting | Extreme discrepancy between training and testing; the model memorizes training data but fails to generalize. |
+| `Training and Testing Both Low (<60%)` | Underfitting | Poor performance on both datasets, indicating the model is too simple or lacks sufficient learning. |
+
+
+### Accuracy Summary
+
+<ins>Pros:</ins>
+- Describes well the overall correctness of the model.
+- Works well for balanced classes within the dataset.
+
+<ins>Cons:</ins>
+- Works poorly for imbalanced classes within a dataset. Since it is an overall metric, wrong predictions on small size classes would not be reflected.
+
+- **Precision**: 
+
+
+
 ## First batch of results <a name="results"></a>
 
-We applied these tests to the neural network. In this part, we will comment the tests ran on the training of the neural network.
+We applied some tests to the neural network to measure its performance, and ensure the quality of the predictions. 
+In this part, we will comment the tests ran on the training of the neural network.
 
 ### Test 1 - Overfitting test
 

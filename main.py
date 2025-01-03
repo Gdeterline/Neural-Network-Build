@@ -156,7 +156,7 @@ def train_nn(nb_layers, X, y, nb_neurons, learning_rate, epochs, g=sigmoid, gder
         Epochs.append(i)
         Losses.append(loss(y, y_hat, nb_samples))
                 
-        if i % 100 == 0:
+        if i % 500 == 0:
             print(f"Epoch {i} - Loss: {loss(y, y_hat, nb_samples)}")
             Epochs.append(i)
             Losses.append(loss(y, y_hat, nb_samples))

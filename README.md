@@ -113,6 +113,8 @@ In order to build a neural network, we need to define the following notations:
 
 - **X**: the input data, which is a matrix of shape (n, m), where n is the number of features and m is the number of samples.
 
+- **y**: the actual values of the input data.
+
 - **W**: the list of weight matrices of the neural network, which is a list of matrices of shape (n[i], n[i-1]), where n[i] is the number of neurons in the i-th layer of the neural network, and n[i-1] is the number of neurons in the (i-1)-th layer of the neural network.
 
 - **b**: the list of bias vectors of the neural network, which is a list of vectors of shape (n[i], 1), where n[i] is the number of neurons in the i-th layer of the neural network.
@@ -121,11 +123,13 @@ In order to build a neural network, we need to define the following notations:
 
 - **A**: the list of output matrices of the neural network, which is a list of matrices of shape (n[i], m), where n[i] is the number of neurons in the i-th layer of the neural network, and m is the number of samples. The value of A[0] is the input data X. The difference between A and Z is that A is the output of the activation function applied to Z.
 
-- **$\hat{Y}$**: the prediction of the neural network, which is the output of the output layer of the neural network.
+- **$\hat{Y}$**: the prediction of the neural network, which is the output of the output layer of the neural network.  
 
 
 
-_**The list needs to be completed along the way, as we will need to define other matrices and vectors to build the neural network.**_
+<p align="center">
+  <img src=./images/nn_light.png?raw=true alt="nn", width="900"/>
+</p>
 
 
 ### Activation Function <a name="activation-function"></a>

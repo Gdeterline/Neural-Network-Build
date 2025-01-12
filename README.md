@@ -680,7 +680,7 @@ Let's proceed to comparing it with existing NNs.
 
 #### PyTorch Neural Network
 
-We implemented the neural network with PyTorch in another project - [breast_cancer_classification_pytorch.ipynb](#https://github.com/Gdeterline/Small-Projects-And-Courses/blob/main/PyTorch-Devs/breast_cancer_classification_pytorch.ipynb).
+We implemented the neural network with PyTorch in another project - [breast_cancer_classification_pytorch.ipynb](https://github.com/Gdeterline/Small-Projects-And-Courses/blob/main/PyTorch-Devs/breast_cancer_classification_pytorch.ipynb).
 The working conditions were exactly the same, so we can compare the performance of the two models.
 
 The results are as follows:

@@ -678,6 +678,24 @@ We split the dataset into a training set and a testing set, to evaluate the perf
 
 Let's proceed to comparing it with existing NNs.
 
+#### PyTorch Neural Network
+
+We implemented the neural network with PyTorch in another project - [breast_cancer_classification_pytorch.ipynb](#https://github.com/Gdeterline/Small-Projects-And-Courses/blob/main/PyTorch-Devs/breast_cancer_classification_pytorch.ipynb).
+The working conditions were exactly the same, so we can compare the performance of the two models.
+
+The results are as follows:
+- 23.1 seconds for the training of the PyTorch neural network.
+- 92.97% accuracy on the training set.
+- 95.61% accuracy on the testing set.
+
+The results are very good, as the accuracy is close to 100%. The neural network is able to learn the input dataset, and predict the true values of the input dataset. The results are a little lower, though very close to the results of the neural network built from scratch.
+
+<ins>Conclusions:</ins> The results are slightly better with our neural network, which is a good sign. Yet, we have two improvements to make:
+- The computation time is quite high for such a small dataset, and we need to find a way to reduce it. Ours is 1.5 times slower than the PyTorch one.
+- The flexibility of the PyTorch neural network is slightly better than ours - for instance, the possibility to change the activation function for each layer. We need to find a way to improve the flexibility of our neural network.
+
+#### TensorFlow Neural Network
+
 
 ## Optimization <a name="optimization"></a>
 

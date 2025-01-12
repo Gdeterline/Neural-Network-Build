@@ -693,6 +693,7 @@ The results are very good, as the accuracy is close to 100%. The neural network 
 <ins>Conclusions:</ins> The results are slightly better with our neural network, which is a good sign. Yet, we have two improvements to make:
 - The computation time is quite high for such a small dataset, and we need to find a way to reduce it. Ours is 1.5 times slower than the PyTorch one.
 - The flexibility of the PyTorch neural network is slightly better than ours - for instance, the possibility to change the activation function for each layer. We need to find a way to improve the flexibility of our neural network.
+Finally, the performance of a neural network depends on many factors, such as the hyperparameters, the activation function, the loss function, the number of layers, the number of neurons in each layer, etc. It is important to test the neural network on several datasets, to ensure that the neural network is actually as performant as those built with PyTorch, TensorFlow, etc.
 
 #### TensorFlow Neural Network
 

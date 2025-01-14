@@ -682,11 +682,13 @@ Let's proceed to comparing it with existing NNs.
 
 We implemented the neural network with PyTorch in another project - [breast_cancer_classification_pytorch.ipynb](https://github.com/Gdeterline/Small-Projects-And-Courses/blob/main/PyTorch-Devs/breast_cancer_classification_pytorch.ipynb).
 The working conditions were exactly the same, so we can compare the performance of the two models.
+ 
+|| **PyTorch Neural Network** | **My Neural Network**        |
+|----------------------|------------------------------------------|------------------------------------------|
+|Training Time| `23.1 seconds` | `107.3 seconds` |
+|Accuracy on the training dataset| `92.97%` | `96.48%` |
+|Accuracy on the testing dataset| `95.61%` | `98.25%` |
 
-The results are as follows:
-- 23.1 seconds for the training of the PyTorch neural network.
-- 92.97% accuracy on the training set.
-- 95.61% accuracy on the testing set.
 
 The results are very good, as the accuracy is close to 100%. The neural network is able to learn the input dataset, and predict the true values of the input dataset. The results are a little lower, though very close to the results of the neural network built from scratch.
 
